@@ -381,11 +381,14 @@ export default defineGkdApp({
       key: 15,
       name: '分段广告-视频详情页下方推广',
       desc: '关闭[广告/推广/直播]',
-      fastQuery: true,
+      // 注意: 组级不要开 fastQuery。B站 9.20.0 的操作浮层是 Compose 节点,
+      // 文本 textQf=false 不在快查索引中, 组级快查会导致下面基于文本的规则永远不匹配。
+      // 只给规则0(按 vid 匹配)开启规则级快查。
       activityIds: 'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity',
       rules: [
         {
           key: 0,
+          fastQuery: true,
           anyMatches: [
             '@[vid="more" || vid="more_layout" || id="tv.danmaku.bili.adbiz:id/more" || id="tv.danmaku.bili.adbiz:id/more_layout"] <<n [vid="ad_tint_frame" || id="tv.danmaku.bili.adbiz:id/ad_tint_frame" || id="tv.danmaku.bili.adbiz:id/ad_tint_frame"][visibleToUser=true]', // 广告、推广
             '@[vid="more"] -(3,5) [vid="live_lottie_layout"][visibleToUser=true]', // 直播
@@ -573,25 +576,6 @@ export default defineGkdApp({
             'com.bilibili.bililive.room.ui.roomv3.LiveRoomActivityV3',
           matches: '@[vid="live_combo_action_button"] > [text="投喂"]',
           snapshotUrls: 'https://i.gkd.li/i/25238945',
-        },
-      ],
-    },
-    {
-      key: 23,
-      name: '分段广告-视频页广告操作浮层',
-      desc: '广告关闭后弹出[添加至稍后再看/不感兴趣]浮层时,点击[不感兴趣]',
-      // 注意: 不要开启 fastQuery。本地快照 1795255960958(B站 9.20.0):
-      // 该浮层是 Compose 节点,textQf=false,文本不在快查索引中,开快查会匹配不到
-      activityIds: 'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity',
-      // 跨组引用组15(视频详情页下方推广)的规则key,
-      // 使[不感兴趣]只在 GKD 自己点过广告[更多]后才触发,手动长按弹出的浮层不受影响
-      scopeKeys: [15],
-      rules: [
-        {
-          key: 0,
-          name: '点击[不感兴趣]',
-          preKeys: [0],
-          matches: '@[clickable=true] > [text="不感兴趣"][visibleToUser=true]',
         },
       ],
     },
