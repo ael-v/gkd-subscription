@@ -185,12 +185,15 @@ export default defineGkdApp({
             'TextView[id="com.dongqiudi.news:id/ads_label"] +(n) ImageView[id="com.dongqiudi.news:id/feedback_close"]',
         },
         {
-          // 与首页信息流广告的反馈弹窗一致,未出现时不触发
+          // 关闭广告后弹出的举报/反馈理由弹窗,本地快照 1795243503808(懂球帝 8.7.5):
+          // 底部弹窗 content_view 内同时有 d_plus_options(会员推广)和 recycler_view(理由九宫格),
+          // 选择"诱导点击"提交反馈并移除广告卡片
+          // 注意: 不要用 preKeys 依赖上一条规则,弹窗内容异步加载可能超出"刚刚执行"的时间窗
+          // 用 d_plus_options 锚定广告反馈弹窗,避免误触普通举报弹窗
           key: 1,
-          name: '关闭反馈理由',
-          preKeys: [0],
+          name: '关闭反馈理由弹窗',
           matches:
-            'TextView[text="诱导点击"][id="com.dongqiudi.news:id/text_item"]',
+            '[vid="d_plus_options"] +(n) GridView[id="com.dongqiudi.news:id/recycler_view"] > TextView[text="诱导点击"][clickable=true]',
         },
         {
           // 模板2-优量汇视频广告,本地快照 1795243165826(懂球帝 8.7.5):
