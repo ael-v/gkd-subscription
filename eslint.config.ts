@@ -17,6 +17,15 @@ export default defineConfig(
     },
   },
   {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+      },
+    },
+  },
+  {
     files: ['**/*.{js,mjs,cjs,ts,tsx,mts,cts}'],
     plugins: {
       'unused-imports': unusedImports,

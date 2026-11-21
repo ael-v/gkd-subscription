@@ -226,6 +226,10 @@ importers:
       typescript-eslint:
         specifier: 8.66.0
         version: 8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript@6.0.3)
+    devDependencies:
+      '@gkd-kit/selector':
+        specifier: 0.5.22
+        version: 0.5.22
 
 packages:
 
