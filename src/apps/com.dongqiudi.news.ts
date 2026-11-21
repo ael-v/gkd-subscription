@@ -176,13 +176,14 @@ export default defineGkdApp({
       activityIds: 'com.dongqiudi.news.NewsDetailActivity',
       rules: [
         {
-          // 模板1-图文广告,本地快照 1795241661737(懂球帝 8.7.5):
-          // ads_label[46,1958,1238,2013] 与 feedback_close[1168,1947,1239,2024]
-          // 同属 ads_common_bottom_container,feedback_close 是 ads_label 的后第 2 个兄弟
+          // 模板1-图文广告,本地快照 1795241661737 / 1795243708797(懂球帝 8.7.5):
+          // feedback_close 是 ads_common_bottom_container 的直接子节点
+          // 该容器有两种变体: 带 ads_label"广告"文字 / 换成 d_plus_options 会员推广,
+          // 因此用容器而非 ads_label 作锚点
           key: 0,
           name: '点击广告卡片右下角x(图文广告)',
           matches:
-            'TextView[id="com.dongqiudi.news:id/ads_label"] +(n) ImageView[id="com.dongqiudi.news:id/feedback_close"]',
+            'RelativeLayout[id="com.dongqiudi.news:id/ads_common_bottom_container"] > ImageView[id="com.dongqiudi.news:id/feedback_close"]',
         },
         {
           // 关闭广告后弹出的举报/反馈理由弹窗,本地快照 1795243503808(懂球帝 8.7.5):
