@@ -9,6 +9,54 @@ export default defineGkdApp({
   name: '酷安',
   groups: [
     {
+      // 来源: AIsouler/GKD_subscription(开屏广告组整体移植)
+      key: -1,
+      name: '开屏广告',
+      matchTime: 10000,
+      actionMaximum: 1,
+      resetMatch: 'app',
+      actionMaximumKey: 0,
+      priorityTime: 10000,
+      excludeActivityIds: [
+        '.view.search.', // 在搜索页面禁用
+        '.view.feed.', // 在动态页面禁用
+        '.view.node.DynamicNodePageActivity',
+      ],
+      rules: [
+        {
+          key: 0,
+          fastQuery: true,
+          anyMatches: [
+            '@View[text=null][clickable=true][childCount=0][visibleToUser=true][width<200&&height<200] +(1,2) TextView[index=parent.childCount.minus(1)][childCount=0] <n FrameLayout[childCount>2][text=null][desc=null] >(n+6) [text*="第三方应用" || text*="扭动手机" || text*="点击或上滑" || text*="省钱好物" || text*="扭一扭"][visibleToUser=true]',
+            'FrameLayout > FrameLayout[childCount>2][text=null][desc=null] > @View[text=null][clickable=true][childCount=0][visibleToUser=true][width<200&&height<200] +(1,2) TextView[index=parent.childCount.minus(1)][childCount=0][visibleToUser=true]',
+          ],
+          snapshotUrls: [
+            'https://i.gkd.li/i/12503773',
+            'https://i.gkd.li/i/13247610',
+            'https://i.gkd.li/i/13264779',
+            'https://i.gkd.li/i/13826359',
+            'https://i.gkd.li/i/13827095',
+          ],
+        },
+        {
+          key: 1,
+          fastQuery: true,
+          matches:
+            '[!(id="com.coolapk.market:id/item_view") && !(vid="card_view")] > [text*="跳过"][text.length<10][width<500 && height<300][visibleToUser=true]',
+          snapshotUrls: [
+            'https://i.gkd.li/i/12917990',
+            'https://i.gkd.li/i/13211392',
+            'https://i.gkd.li/i/23097140',
+          ],
+          excludeSnapshotUrls: [
+            'https://i.gkd.li/i/13247733',
+            'https://i.gkd.li/i/13296816',
+            'https://i.gkd.li/i/18245546',
+          ],
+        },
+      ],
+    },
+    {
       key: 0,
       name: '局部广告-动态详情页信息流广告',
       desc: '点击广告卡片右上角[关闭]-弹出的反馈菜单选择[不感兴趣]',
