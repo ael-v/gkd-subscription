@@ -168,5 +168,31 @@ export default defineGkdApp({
         },
       ],
     },
+    {
+      key: 10,
+      name: '分段广告-帖子详情页信息流广告',
+      desc: '点击广告卡片右下角x关闭-关闭反馈理由弹窗',
+      activityIds: 'com.dongqiudi.news.NewsDetailActivity',
+      fastQuery: true,
+      rules: [
+        {
+          // 本地快照 1795241661737(懂球帝 8.7.5):
+          // ads_label[46,1958,1238,2013] 与 feedback_close[1168,1947,1239,2024]
+          // 同属 ads_common_bottom_container,feedback_close 是 ads_label 的后第 2 个兄弟
+          key: 0,
+          name: '点击广告卡片右下角x',
+          matches:
+            'TextView[id="com.dongqiudi.news:id/ads_label"] +(n) ImageView[id="com.dongqiudi.news:id/feedback_close"]',
+        },
+        {
+          // 与首页信息流广告的反馈弹窗一致,未出现时不触发
+          key: 1,
+          name: '关闭反馈理由',
+          preKeys: [0],
+          matches:
+            'TextView[text="诱导点击"][id="com.dongqiudi.news:id/text_item"]',
+        },
+      ],
+    },
   ],
 });
