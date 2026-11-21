@@ -583,10 +583,14 @@ export default defineGkdApp({
       // 注意: 不要开启 fastQuery。本地快照 1795255960958(B站 9.20.0):
       // 该浮层是 Compose 节点,textQf=false,文本不在快查索引中,开快查会匹配不到
       activityIds: 'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity',
+      // 跨组引用组15(视频详情页下方推广)的规则key,
+      // 使[不感兴趣]只在 GKD 自己点过广告[更多]后才触发,手动长按弹出的浮层不受影响
+      scopeKeys: [15],
       rules: [
         {
           key: 0,
           name: '点击[不感兴趣]',
+          preKeys: [0],
           matches: '@[clickable=true] > [text="不感兴趣"][visibleToUser=true]',
         },
       ],
