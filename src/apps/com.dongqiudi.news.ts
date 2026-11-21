@@ -176,11 +176,11 @@ export default defineGkdApp({
       activityIds: 'com.dongqiudi.news.NewsDetailActivity',
       rules: [
         {
-          // 本地快照 1795241661737(懂球帝 8.7.5):
+          // 模板1-图文广告,本地快照 1795241661737(懂球帝 8.7.5):
           // ads_label[46,1958,1238,2013] 与 feedback_close[1168,1947,1239,2024]
           // 同属 ads_common_bottom_container,feedback_close 是 ads_label 的后第 2 个兄弟
           key: 0,
-          name: '点击广告卡片右下角x',
+          name: '点击广告卡片右下角x(图文广告)',
           matches:
             'TextView[id="com.dongqiudi.news:id/ads_label"] +(n) ImageView[id="com.dongqiudi.news:id/feedback_close"]',
         },
@@ -191,6 +191,15 @@ export default defineGkdApp({
           preKeys: [0],
           matches:
             'TextView[text="诱导点击"][id="com.dongqiudi.news:id/text_item"]',
+        },
+        {
+          // 模板2-优量汇视频广告,本地快照 1795243165826(懂球帝 8.7.5):
+          // ad_layout > adBox > adView > ... > ads_download_bottom_container
+          // ads_download_close[1147,2048,1218,2119] 是 ads_download 的相邻兄弟
+          key: 2,
+          name: '点击广告卡片右下角x(视频广告)',
+          matches:
+            'TextView[id="com.dongqiudi.news:id/ads_download"] + ImageView[id="com.dongqiudi.news:id/ads_download_close"]',
         },
       ],
     },
