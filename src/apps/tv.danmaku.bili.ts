@@ -444,6 +444,16 @@ export default defineGkdApp({
           exampleUrls: 'https://e.gkd.li/80514576-3656-4dcc-89f5-5992803c8e77',
           snapshotUrls: 'https://i.gkd.li/i/18587456',
         },
+        {
+          // 本地快照 1795268459126(B站 9.20.0, UnitedBizDetailsActivity):
+          // 屏蔽推广理由菜单: menu_text[屏蔽推广] + reason1_layout[不喜欢此商品] / reason2_layout[不想看此IP]
+          preKeys: [1],
+          key: 3,
+          name: '屏蔽推广-选择[不喜欢此商品]',
+          fastQuery: true,
+          matches:
+            '@RelativeLayout[vid="reason1_layout"] > [text="不喜欢此商品"]',
+        },
       ],
     },
     {
