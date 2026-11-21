@@ -576,5 +576,20 @@ export default defineGkdApp({
         },
       ],
     },
+    {
+      key: 23,
+      name: '分段广告-视频页广告操作浮层',
+      desc: '广告关闭后弹出[添加至稍后再看/不感兴趣]浮层时,点击[不感兴趣]',
+      // 注意: 不要开启 fastQuery。本地快照 1795255960958(B站 9.20.0):
+      // 该浮层是 Compose 节点,textQf=false,文本不在快查索引中,开快查会匹配不到
+      activityIds: 'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity',
+      rules: [
+        {
+          key: 0,
+          name: '点击[不感兴趣]',
+          matches: '@[clickable=true] > [text="不感兴趣"][visibleToUser=true]',
+        },
+      ],
+    },
   ],
 });
