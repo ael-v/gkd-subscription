@@ -172,8 +172,10 @@ export default defineGkdApp({
       key: 10,
       name: '分段广告-帖子详情页信息流广告',
       desc: '点击广告卡片右下角x关闭-关闭反馈理由弹窗',
-      // 注意: 不要开启 fastQuery, 实测该组在快查模式下可能不触发
+      // 三条规则的锚点(feedback_close/诱导点击/ads_download_close)均快查兼容,
+      // 关闭 fastQuery 会导致慢查询 5-10 秒才响应
       activityIds: 'com.dongqiudi.news.NewsDetailActivity',
+      fastQuery: true,
       rules: [
         {
           // 模板1-图文广告,本地快照 1795241661737 / 1795243708797(懂球帝 8.7.5):
