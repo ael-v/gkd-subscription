@@ -86,6 +86,14 @@ export default defineGkdApp({
             'TextView[id="com.dongqiudi.news:id/ads_title"] +(2) RelativeLayout > ImageView[id="com.dongqiudi.news:id/feedback_close"]',
           snapshotUrls: 'https://i.gkd.li/i/12620788',
         },
+        {
+          // 模板-优量汇视频广告(首页),本地快照 1795394917814(懂球帝 8.7.5):
+          // ads_download_close[1147,1455,1218,1526] 是 ads_download"点击下载"的相邻兄弟
+          key: 3,
+          name: '点击广告卡片右下角x(视频广告)',
+          matches:
+            'TextView[id="com.dongqiudi.news:id/ads_download"] + ImageView[id="com.dongqiudi.news:id/ads_download_close"]',
+        },
       ],
     },
     {
@@ -174,7 +182,12 @@ export default defineGkdApp({
       desc: '点击广告卡片右下角x关闭-关闭反馈理由弹窗',
       // 三条规则的锚点(feedback_close/诱导点击/ads_download_close)均快查兼容,
       // 关闭 fastQuery 会导致慢查询 5-10 秒才响应
-      activityIds: 'com.dongqiudi.news.NewsDetailActivity',
+      // ScorePlayerCommentActivity(球员评分评论页)同样是信息流广告卡片,
+      // 本地快照 1795394905235: ads_download_close[1159,1889,1222,1952]
+      activityIds: [
+        'com.dongqiudi.news.NewsDetailActivity',
+        'com.dongqiudi.news.ScorePlayerCommentActivity',
+      ],
       fastQuery: true,
       rules: [
         {
