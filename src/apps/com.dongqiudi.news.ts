@@ -120,6 +120,18 @@ export default defineGkdApp({
           exampleUrls: 'https://e.gkd.li/87e47cae-fa83-4d25-879c-728a1519ee55',
           snapshotUrls: 'https://i.gkd.li/i/20403710',
         },
+        {
+          // 汇量 Windmill SDK 插屏广告,本地快照 1795586517165(懂球帝 8.7.5):
+          // StubActivityStandard_TL_Portrait 右上角 [跳过｜4]
+          // activityIds 用前缀匹配,覆盖该 SDK 的所有 StubActivity 变体
+          key: 2,
+          name: '汇量SDK插屏-点击[跳过]',
+          fastQuery: true,
+          actionMaximum: 1,
+          activityIds: 'com.windmill.sdk.host.stub.',
+          matches:
+            '[id="com.windmill.sdk.core:id/tobid_interstitial_skip_ll"][clickable=true]',
+        },
       ],
     },
     {
