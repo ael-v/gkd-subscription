@@ -58,10 +58,11 @@ export default defineGkdApp({
     },
     {
       key: 0,
-      name: '局部广告-动态详情页信息流广告',
+      name: '局部广告-信息流广告卡片',
       desc: '点击广告卡片右上角[关闭]-弹出的反馈菜单选择[不感兴趣]',
       // 1. 广告卡结构: coolapk_card_view > item_view > ... > close_view(desc=关闭)
       //    用 coolapk_card_view 锚定,避免误触其他页面中同名的 close_view
+      //    容器类名不定: 动态详情页为 FrameLayout, 搜索结果页为 CardView, 因此不限定类名
       // 2. 反馈菜单是独立弹窗窗口,快照中 activityId 为 null,
       //    因此该规则不能带 activityIds(组级别也无法限定,只能放在规则0上)
       //    菜单结构: ListView > 可点击行 > 文本[不感兴趣],文本 textQf=true 可快查
@@ -70,9 +71,11 @@ export default defineGkdApp({
         {
           key: 0,
           name: '点击广告卡片右上角[关闭]',
-          activityIds: 'com.coolapk.market.view.feed.FeedDetailActivityV8',
-          matches:
-            '@ImageView[vid="close_view"] <<n FrameLayout[vid="coolapk_card_view"]',
+          activityIds: [
+            'com.coolapk.market.view.feed.FeedDetailActivityV8', // 动态详情页, 快照 1795257622218
+            'com.coolapk.market.view.search.SuperSearchResultActivity', // 搜索结果页, 快照 1795586670768
+          ],
+          matches: '@ImageView[vid="close_view"] <<n [vid="coolapk_card_view"]',
         },
         {
           key: 1,
